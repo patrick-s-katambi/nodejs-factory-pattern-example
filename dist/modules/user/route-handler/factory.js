@@ -19,6 +19,8 @@ function makeUserRouteHandler({ database }) {
             switch (httpRequest.method) {
                 case "GET":
                     return getUsers(httpRequest, database);
+                case "POST":
+                    return addUser(httpRequest, database);
                 default:
                     return (0, adapt_response_1.default)({ data: {}, headers: {}, message: "", statusCode: 200 });
             }
@@ -32,6 +34,19 @@ function makeUserRouteHandler({ database }) {
                 headers: { "Content-Type": "application/json" },
                 message: "success",
                 statusCode: 200,
+            });
+        });
+    }
+    function addUser(httpRequest, database) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const requestBody = httpRequest.body;
+            const { email, username } = requestBody;
+            const user = yield database.user.create({ data: { email, username } });
+            return (0, adapt_response_1.default)({
+                data: user,
+                headers: { "Content-Type": "application/json" },
+                message: "user created successfully",
+                statusCode: 201,
             });
         });
     }

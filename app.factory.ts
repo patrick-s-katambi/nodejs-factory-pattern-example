@@ -4,14 +4,14 @@ import userController from "./modules/user/controller";
 import loggerMiddleware from "./middleware/logger";
 
 export default function makeApp() {
-  const app = express();
+    const app = express();
 
-  // middlewares
-  app.use(bodyParser.json());
-  app.use(loggerMiddleware);
+    // middlewares
+    app.use(bodyParser.json());
+    app.use(loggerMiddleware);
 
-  // routes
-  app.get("/users", userController);
+    // routes
+    app.all("/users", userController);
 
-  return app;
+    return app;
 }

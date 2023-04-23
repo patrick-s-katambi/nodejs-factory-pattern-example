@@ -13,7 +13,7 @@ function makeApp() {
     app.use(body_parser_1.default.json());
     app.use(logger_1.default);
     // routes
-    app.get("/users", controller_1.default);
+    app.all("/users", controller_1.default);
     return app;
 }
 exports.default = makeApp;
