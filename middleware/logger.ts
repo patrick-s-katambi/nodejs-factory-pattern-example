@@ -8,7 +8,7 @@ export default function loggerMiddleware(req: Request, res: Response, next: Next
   const httpRequest = adaptRequest({ req });
   const method = httpRequest.method.toUpperCase();
   const path = httpRequest.path;
-  const fullPathUrl = `http://localhost:${PORT}/${path}`;
+  const fullPathUrl = `http://localhost:${PORT}${path}`;
 
   console.log(`${color.yellow.bgBlueBright.bold.underline(method)} ${color.yellow(fullPathUrl)}`);
 

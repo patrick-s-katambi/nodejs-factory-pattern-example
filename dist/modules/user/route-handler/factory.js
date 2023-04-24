@@ -18,16 +18,17 @@ function makeUserRouteHandler({ database }) {
         return __awaiter(this, void 0, void 0, function* () {
             switch (httpRequest.method) {
                 case "GET":
-                    return getUsers(httpRequest);
+                    return getUsers(httpRequest, database);
                 default:
                     return (0, adapt_response_1.default)({ data: {}, headers: {}, message: "", statusCode: 200 });
             }
         });
     };
-    function getUsers(httpRequest) {
+    function getUsers(httpRequest, database) {
         return __awaiter(this, void 0, void 0, function* () {
+            const users = yield database.user.findMany();
             return (0, adapt_response_1.default)({
-                data: ["Ptrick Simon", "Peter Qwill"],
+                data: users,
                 headers: { "Content-Type": "application/json" },
                 message: "success",
                 statusCode: 200,
